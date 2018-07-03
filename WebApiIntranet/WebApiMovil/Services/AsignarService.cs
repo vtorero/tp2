@@ -16,6 +16,19 @@ namespace WebApiMovil.Services
             asignarBL = new AsignarBL();
         }
 
+
+        public Proyecto BuscarProyectos(Proyecto entidad)
+        {
+            try
+            {
+              return asignarBL.obtenerProyecto(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public List<Proyecto> ListadoProyectos()
         {
             try

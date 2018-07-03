@@ -27,6 +27,19 @@ namespace WebApiMovil.BusinessLayer
                 throw;
             }
         }
+
+        public Proyecto obtenerProyecto(Proyecto entidad)
+        {
+            try
+            {
+                return asignarDA.ObtenerProyectoName(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public List<Asignacion> ListadoEquiposAsignados(Asignacion entidad)
         {
             try

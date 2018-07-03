@@ -12,6 +12,8 @@ namespace WebApiMovil.DataLayer
     public class AsignarDA
     {
 
+        
+
         public List<Proyecto> ListarProyectos()
         {
             List<Proyecto> Lista = new List<Proyecto>();
@@ -63,6 +65,57 @@ namespace WebApiMovil.DataLayer
                 throw (ex);
             }
         }
+
+        public Proyecto ObtenerProyectoName(Proyecto proyecto)
+        {
+            try
+            {
+                using (SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnxLaptop"].ConnectionString))
+                {
+                    conection.Open();
+
+                    using (SqlCommand command = new SqlCommand("SP_BUSCA_PROYECTO", conection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@nombreProyecto", proyecto.nombreProyecto);
+
+                        using (SqlDataReader dr = command.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                while (dr.Read())
+                                {
+                                    
+                                    if (!dr.IsDBNull(dr.GetOrdinal("codProyecto")))
+                                        proyecto.codProyecto = dr.GetInt32(dr.GetOrdinal("codProyecto"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("nombreProyecto")))
+                                        proyecto.nombreProyecto = dr.GetString(dr.GetOrdinal("nombreProyecto"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("fechaInicio")))
+                                        proyecto.fechaInicio = dr.GetDateTime(dr.GetOrdinal("fechaInicio"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("fechaFin")))
+                                        proyecto.fechaFin = dr.GetDateTime(dr.GetOrdinal("fechaFin"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("estado")))
+                                        proyecto.estado = dr.GetString(dr.GetOrdinal("estado"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("fechaCreacion")))
+                                        proyecto.fechaCreacion = dr.GetDateTime(dr.GetOrdinal("fechaCreacion"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("usuarioCreacion")))
+                                        proyecto.usuarioCreacion = dr.GetString(dr.GetOrdinal("usuarioCreacion"));
+
+                                  
+                                }
+                            }
+                        }
+                    }
+                    conection.Close();
+                }
+                return proyecto;
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+
 
         public List<Empleado> ListadoEmpleados(Empleado  entidad)
         {

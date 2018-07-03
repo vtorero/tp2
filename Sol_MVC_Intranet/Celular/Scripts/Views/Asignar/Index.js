@@ -3,7 +3,7 @@ let confirm = require('jquery-confirm');
 var tblAsignacion = null;
 var tblAccesorioDev = null;
 $(document).ready(function () {
-    llenarTabla();
+    llenarTabla2();
 });
 
 $("#btnAgregar").click(function () {
@@ -17,30 +17,32 @@ $("#btnBuscar").click(function () {
     var entidad = {};
     entidad.nombreProyecto = proyecto;
     console.log(entidad);
-    $.ajax({
-        type: 'POST',
-        data:entidad,
-        url: 'http://localhost:9586/api/Asignar/ListadoProyectos',
-        dataType: 'json', contentType: "application/json; charset=utf-8",
-        async: false,
-        success: function (data) {
-            output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
-            output += '<thead><tr><th>Código</th><th>Proyecto</th><th>Fecha inicio</th><th>Fecha Fin</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
-
-        console.log("datax", data);
-            for (var i in data) {
-
-                output += '<tr><th scope="row">' + data[i].codProyecto + '</th><td>' + data[i].nombreProyecto + '</td><td>' + data[i].fechaInicio.substring(0, 10) + '</td><td>' + data[i].fechaFin.substring(0, 10) + '</td><td>' + data[i].estado + '</td></tr>';
+    if (proyecto != '') {
+        $.ajax({
+            "data": entidad,
+            "url": 'http://localhost:9586/api/Asignar/BuscarProyectoName',
+            "dataType": "json",
+            "type": "POST",
+            "cache": false,
+            "async": false,
+            success: function (data) {
+                output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
+                output += '<thead><tr><th>Código</th><th>Proyecto</th><th>Fecha inicio</th><th>Fecha Fin</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
+                console.log("datax", data);
+                //    for (const i in data) {
+                //console.log(data.codProyecto);
+                output += '<tr><th scope="row">' + data.codProyecto + '</th><td>' + data.nombreProyecto + '</td><td>' + data.fechaInicio + '</td><td>' + data.fechaFin + '</td><td>' + data.estado + '</td><a href="solicitud/index/' + data.codProyecto +'">Modificar</a></td></tr>';
                 //console.log(data[i].DEPA_DESCRIPCION);
 
+                //  }
+                $('#resultado').html(output);
+
             }
-            $('#resultado').html(output);
+        });
+    } else {
+        alert("Debe ingresar el criterio de búsqueda");
 
-
-
-
-        }
-    });
+    }
 });
 
 function llenarTabla2() {
@@ -48,21 +50,23 @@ function llenarTabla2() {
     
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:9586/api/Asignar/ListarDepartamento',
-        dataType: 'json', contentType: "application/json; charset=utf-8",
+        url: 'http://localhost:9586/api/Asignar/ListadoProyectos',
+        dataType: 'json',
         async: false,
         success: function (data)
         {
-            output = '<table class="table"><thead><tr><th scope="col">codigo</th><th scope="col">Tipo</th><th scope="col">nombre</th></tr></thead><tbody>';
+            output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
+            output += '<thead><tr><th>Código</th><th>Proyecto</th><th>Fecha inicio</th><th>Fecha Fin</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
+          
             
             console.log("datax", data);
             for (var i in data) {
-
-                output += '<tr><th scope="row">' + (parseFloat(i) + 1) + '</th><td>' + data[i].DEPA_DESCRIPCION + '</td><td>' + data[i].DEPA_CODREF + '</td></tr>';
+                console.log(i);
+                output += '<tr><th scope="row">' + data[i].codProyecto + '</th><td>' + data[i].nombreProyecto + '</td><td>' + data[i].fechaInicio + '</td><td>' + data[i].fechaFin + '</td><td>' + data[i].estado + '</td><td><a href="solicitud/index/' + data[i].codProyecto +'">Modificar</a></td></tr>';
                 //console.log(data[i].DEPA_DESCRIPCION);
 
             }
-            $('#tblAsignacion').html(output);
+            $('#resultado').html(output);
 
             
 
@@ -74,7 +78,7 @@ function llenarTabla2() {
 
 }
 
-function llenarTabla2() {
+function llenarTabla() {
     tblAsignacion = $("#tblAsignacion")
         .dataTable({
             "bLengthChange": false,
@@ -163,7 +167,7 @@ function llenarTabla2() {
 
                             $(".reposicion").click(function () {
 
-                                debugger;
+                               // debugger;
                                 var id = $(this).data("id");
                                 var entidad = {};
                                 entidad.idCodAsignacion = id;

@@ -8,7 +8,7 @@ using WebApiMovil.DataLayer;
 using WebApiMovil.Models;
 using WebApiMovil.Services;
 
-namespace WebApi.Controllers
+namespace WebApiMovil.Controllers
 {
     public class AsignarController : System.Web.Http.ApiController
     {
@@ -21,6 +21,21 @@ namespace WebApi.Controllers
         }
 
         //[Authorize]
+
+        [HttpPost]
+        [ActionName("BuscarProyectoName")]
+        public Proyecto BuscarProyectoName(Proyecto entidad)
+        {
+            try
+            {
+                return asignarService.BuscarProyectos(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
 
         [HttpPost]
         [ActionName("ListadoProyectos")]
