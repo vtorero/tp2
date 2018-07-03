@@ -12,7 +12,8 @@ namespace Celular.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            ViewBag.Title = "Buscar Solicitudes | INDRA S.A";
+            
+            ViewBag.Titulo = "Buscar Proyectos";
             return View();
         }
 

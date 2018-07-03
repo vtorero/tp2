@@ -31,7 +31,7 @@ $("#btnBuscar").click(function () {
                 console.log("datax", data);
                 //    for (const i in data) {
                 //console.log(data.codProyecto);
-                output += '<tr><th scope="row">' + data.codProyecto + '</th><td>' + data.nombreProyecto + '</td><td>' + data.fechaInicio + '</td><td>' + data.fechaFin + '</td><td>' + data.estado + '</td><a href="solicitud/index/' + data.codProyecto +'">Modificar</a></td></tr>';
+                output += '<tr><th scope="row">' + data.codProyecto + '</th><td>' + data.nombreProyecto + '</td><td>' + data.fechaInicio + '</td><td>' + data.fechaFin + '</td><td>' + data.estado + '</td><td><a href="solicitud/index/' + data.codProyecto +'">Modificar</a></td></tr>';
                 //console.log(data[i].DEPA_DESCRIPCION);
 
                 //  }
