@@ -26,15 +26,22 @@ $("#btnBuscar").click(function () {
             "cache": false,
             "async": false,
             success: function (data) {
+                console.log("objeto",data.length);
                 output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
                 output += '<thead><tr><th>Código</th><th>Proyecto</th><th>Fecha inicio</th><th>Fecha Fin</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
                 console.log("datax", data);
                 //    for (const i in data) {
                 //console.log(data.codProyecto);
+                if (data.estado == "Proyecto no encontrado") {
+                    output += '<tr><td colspan="6" align="center">' + data.estado + '</td></tr>';
+                }
+                    else{
                 output += '<tr><th scope="row">' + data.codProyecto + '</th><td>' + data.nombreProyecto + '</td><td>' + data.fechaInicio + '</td><td>' + data.fechaFin + '</td><td>' + data.estado + '</td><td><a href="solicitud/index/' + data.codProyecto +'">Modificar</a></td></tr>';
-                //console.log(data[i].DEPA_DESCRIPCION);
-
+                }
+                    //console.log(data[i].DEPA_DESCRIPCION);
+                output += '</table>';
                 //  }
+
                 $('#resultado').html(output);
 
             }

@@ -1,19 +1,12 @@
-USE [inspeccion]
-GO
-
-INSERT INTO [dbo].[proyecto]
-           ([nombreProyecto]
-           ,[fechaInicio]
-           ,[fechaFin]
-           ,[estado]
-           ,[fechaCreacion]
-           ,[usuarioCreacion])
-     VALUES
-           (<nombreProyecto, varchar(50),>
-           ,<fechaInicio, date,>
-           ,<fechaFin, date,>
-           ,<estado, varchar(50),>
-           ,<fechaCreacion, date,>
-           ,<usuarioCreacion, varchar(50),>)
-GO
-
+CREATE PROC SP_BUSCA_PROYECTO
+@nombreProyecto varchar(50)
+AS BEGIN
+SELECT [codProyecto]
+      ,[nombreProyecto]
+      ,[fechaInicio]
+      ,[fechaFin]
+      ,[estado]
+      ,[fechaCreacion]
+      ,[usuarioCreacion]
+  FROM [inspeccion].[dbo].[proyecto] where [nombreProyecto] like '%'+@nombreProyecto+'%';
+  END

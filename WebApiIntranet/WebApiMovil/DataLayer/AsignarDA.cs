@@ -104,6 +104,10 @@ namespace WebApiMovil.DataLayer
                                   
                                 }
                             }
+                            else
+                            {
+                                proyecto.estado = "Proyecto no encontrado";
+                            }
                         }
                     }
                     conection.Close();

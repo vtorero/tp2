@@ -181,3 +181,4 @@ D:\tp2\Sol_MVC_Intranet\Celular\obj\Debug\MVC.csproj.CoreCompileInputs.cache
 D:\tp2\Sol_MVC_Intranet\Celular\obj\Debug\MVC.csproj.CopyComplete
 D:\tp2\Sol_MVC_Intranet\Celular\obj\Debug\Celular.dll
 D:\tp2\Sol_MVC_Intranet\Celular\obj\Debug\Celular.pdb
+D:\tp2\Sol_MVC_Intranet\Celular\obj\Debug\MVC.csprojAssemblyReference.cache
