@@ -3,18 +3,132 @@
     ViewBag.Title = "solicitud";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewBag.idProyecto</h2>
-<div class="row">
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">PROYECTO</h3>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card-body">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Proyecto</label>
+                    <input class="form-control" disabled="" type="text" id="nombreProyecto">
+                </div>
+                <div class="form-group">
+                    <label>Jefe Proyecto</label>
+                    <input class="form-control" disabled="" type="text" id="jefeProyecto">
+                </div>
+                <div class="form-group">
+                    <label>Fecha Solicitud</label>
+                    <input class="form-control" disabled="" type="text" id="fechaSolicitud">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card-body">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Fecha inicio Proyecto</label>
+                    <input class="form-control" disabled="" type="text" id="fechaInicio">
+                </div>
+                <div class="form-group">
+                    <label>Fecha Fin proyecto</label>
+                    <input class="form-control" disabled="" type="text" id="fechaFin">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card-body">
+                <label>Operaciones</label>
+                <div class="form-group">
+                    <button type="button" class="btn btn-block btn-primary  btn-sm">Aceptar Solicitud</button>
+                </div>
+                <div class="form-group">
+                <button type="button" class="btn btn-block btn-danger btn-sm">Rechazar Solicitud</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-block btn-success btn-sm">Solo Grabar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card-body">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Jefe Inspección</label>
+                    <input class="form-control" disabled="" type="text" value="Juan Ramirez" id="jefeInspeccion">
+                </div>
+                <div class="form-group">
+                    <label>Usuario creación</label>
+                    <input class="form-control" disabled="" type="text"  id="usuarioCreacion">
+                </div>
 
 
-
+            </div>
+        </div>
+    </div>
 </div>
+<div class="card card-primary">
+       <div class="row">
+        <div class="card card-info col-sm-6">
+            <div class="card-header">
+                <h3 class="card-title">Coordinador</h3>
+            </div>
+            <div class="col-sm-6">
+                <table border="0" style="width:"100%">
+                    <tr>
+                        <td><button type="button" class="btn btn-block btn-primary  btn-sm">Buscar.. </button>
+                        </td>
+                        <td>
+                            <label>Usuario creación</label>
+                            <input class="form-control" disabled="" type="text" id="nombreProyecto">
+                         </td>
+                        <td>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                                <input class="form-control float-right" id="reservation" type="text">
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                                <input class="form-control float-right" id="reservation" type="text">
+                            </div>
 
-<script src="~/Content/plugins/jquery/jquery.min.js"></script>
-<script>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+
+
+            </div>
+        </div>
+        <div class="card card-info col-sm-6">
+            <div class="card-header">
+                <h3 class="card-title">Inspector</h3>
+            </div>
+            <div class="col-sm-6">
+                <label>Inspector</label>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <script>
     function proyecto(id) {
-        alert(id);
-        var entidad = {};
+         var entidad = {};
         entidad.codProyecto = id;
         $.ajax({
             "data": entidad,
@@ -24,32 +138,20 @@
             "cache": false,
             "async": false,
             success: function (data) {
-                console.log("objeto", data.length);
-                output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
-                output += '<thead><tr><th>Código</th><th>Proyecto</th><th>Fecha solicitud</th><th>Fecha inicio</th><th>Fecha Fin</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
-                console.log("datax", data);
-                //    for (const i in data) {
-                console.log(data);
-                if (data.estado == "0: Registros encontrados") {
-                    output += '<tr><td colspan="7" align="center">' + data.estado + '</td></tr>';
-                }
-                else {
-
+                  console.log(data);
                     var fecha_creacion = new Date(data.fechaCreacion);
                     var fecha_inicio = new Date(data.fechaInicio);
                     var fecha_fin = new Date(data.fechaFin);
-
-                    output += '<tr><th scope="row">' + data.codProyecto + '</th><td>' + data.nombreProyecto + '</td><td>' + fecha_creacion.toLocaleDateString() + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data.estado + '</td><td><a href="solicitud/index/' + data.codProyecto + '">Seleccionar</a></td></tr>';
-                }
-                //console.log(data[i].DEPA_DESCRIPCION);
-                output += '</table>';
-                //  }
-
-                $('#resultado').html(output);
+                $("#nombreProyecto").val(data.nombreProyecto);
+                $("#jefeProyecto").val(data.jefeProyecto);
+                $("#usuarioCreacion").val(data.usuarioCreacion);
+                $("#fechaSolicitud").val(fecha_creacion.toLocaleDateString());
+                $("#fechaInicio").val(fecha_inicio.toLocaleDateString());
+                $("#fechaFin").val(fecha_fin.toLocaleDateString());
 
             }
         });
 
     }
     proyecto(@ViewBag.idProyecto);
-</script>
+    </script>
