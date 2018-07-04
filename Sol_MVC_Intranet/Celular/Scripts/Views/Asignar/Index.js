@@ -11,14 +11,16 @@ $("#btnAgregar").click(function () {
     window.location.href = url + '?id=0&accion=0';
 });
 
+
+
 $("#btnBuscar").click(function () {
     var proyecto = $('#txtProyecto').val();
+    var est = $('#txtestado').val();
     console.log(proyecto);
     var entidad = {};
     entidad.nombreProyecto = proyecto;
-    console.log(entidad);
-    if (proyecto != '') {
-        $.ajax({
+    entidad.estado = est;
+            $.ajax({
             "data": entidad,
             "url": 'http://localhost:9586/api/Asignar/BuscarProyectoName',
             "dataType": "json",
@@ -28,15 +30,20 @@ $("#btnBuscar").click(function () {
             success: function (data) {
                 console.log("objeto",data.length);
                 output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
-                output += '<thead><tr><th>Código</th><th>Proyecto</th><th>Fecha inicio</th><th>Fecha Fin</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
+                output += '<thead><tr><th>Código</th><th>Proyecto</th><th>Fecha solicitud</th><th>Fecha inicio</th><th>Fecha Fin</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
                 console.log("datax", data);
                 //    for (const i in data) {
                 //console.log(data.codProyecto);
-                if (data.estado == "Proyecto no encontrado") {
-                    output += '<tr><td colspan="6" align="center">' + data.estado + '</td></tr>';
+                if (data.estado == "0: Registros encontrados") {
+                    output += '<tr><td colspan="7" align="center">' + data.estado + '</td></tr>';
                 }
-                    else{
-                output += '<tr><th scope="row">' + data.codProyecto + '</th><td>' + data.nombreProyecto + '</td><td>' + data.fechaInicio + '</td><td>' + data.fechaFin + '</td><td>' + data.estado + '</td><td><a href="solicitud/index/' + data.codProyecto +'">Modificar</a></td></tr>';
+                else {
+
+                    var fecha_creacion = new Date(data.fechaCreacion);
+                    var fecha_inicio = new Date(data.fechaInicio);
+                    var fecha_fin = new Date(data.fechaFin);
+
+                    output += '<tr><th scope="row">' + data.codProyecto + '</th><td>' + data.nombreProyecto + '</td><td>' + fecha_creacion.toLocaleDateString() + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data.estado + '</td><td><a href="solicitud/index/' + data.codProyecto +'">Seleccionar</a></td></tr>';
                 }
                     //console.log(data[i].DEPA_DESCRIPCION);
                 output += '</table>';
@@ -46,15 +53,10 @@ $("#btnBuscar").click(function () {
 
             }
         });
-    } else {
-        alert("Debe ingresar el criterio de búsqueda");
-
-    }
+     
 });
 
-function llenarTabla2() {
-
-    
+function llenarTabla2() {  
     $.ajax({
         type: 'POST',
         url: 'http://localhost:9586/api/Asignar/ListadoProyectos',
@@ -63,13 +65,16 @@ function llenarTabla2() {
         success: function (data)
         {
             output = ' <table id="example1" class="table table-bordered table-striped" width="100%">';
-            output += '<thead><tr><th>Código</th><th>Proyecto</th><th>Fecha inicio</th><th>Fecha Fin</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
+            output += '<thead><tr><th>Código</th><th>Proyecto</th><th>Fecha solicitud</th><th>Fecha inicio</th><th>Fecha Fin</th><th>Estado</th><th>Operaciones</th></tr></thead><tbody>';
           
             
             console.log("datax", data);
             for (var i in data) {
                 console.log(i);
-                output += '<tr><th scope="row">' + data[i].codProyecto + '</th><td>' + data[i].nombreProyecto + '</td><td>' + data[i].fechaInicio + '</td><td>' + data[i].fechaFin + '</td><td>' + data[i].estado + '</td><td><a href="solicitud/index/' + data[i].codProyecto +'">Modificar</a></td></tr>';
+                var fecha_creacion = new Date(data[i].fechaCreacion);
+                var fecha_inicio = new Date(data[i].fechaInicio);
+                var fecha_fin = new Date(data[i].fechaFin);
+                output += '<tr><th scope="row">' + data[i].codProyecto + '</th><td>' + data[i].nombreProyecto + '</td><td>' + fecha_creacion.toLocaleDateString() + '</td><td>' + fecha_inicio.toLocaleDateString() + '</td><td>' + fecha_fin.toLocaleDateString() + '</td><td>' + data[i].estado + '</td><td><a href="solicitud/index/' + data[i].codProyecto +'">Seleccionar</a></td></tr>';
                 //console.log(data[i].DEPA_DESCRIPCION);
 
             }

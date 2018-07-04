@@ -49,7 +49,8 @@ namespace WebApiMovil.DataLayer
                                         proyecto.fechaCreacion = dr.GetDateTime(dr.GetOrdinal("fechaCreacion"));
                                     if (!dr.IsDBNull(dr.GetOrdinal("usuarioCreacion")))
                                         proyecto.usuarioCreacion = dr.GetString(dr.GetOrdinal("usuarioCreacion"));
-
+                                    if (!dr.IsDBNull(dr.GetOrdinal("jefeProyecto")))
+                                        proyecto.jefeProyecto = dr.GetString(dr.GetOrdinal("jefeProyecto"));
                                     Lista.Add(proyecto);
                                 }
                             }
@@ -78,6 +79,9 @@ namespace WebApiMovil.DataLayer
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@nombreProyecto", proyecto.nombreProyecto);
+                        command.Parameters.AddWithValue("@estado", proyecto.estado);
+                        command.Parameters.AddWithValue("@codigo", proyecto.codProyecto);
+
 
                         using (SqlDataReader dr = command.ExecuteReader())
                         {
@@ -100,13 +104,14 @@ namespace WebApiMovil.DataLayer
                                         proyecto.fechaCreacion = dr.GetDateTime(dr.GetOrdinal("fechaCreacion"));
                                     if (!dr.IsDBNull(dr.GetOrdinal("usuarioCreacion")))
                                         proyecto.usuarioCreacion = dr.GetString(dr.GetOrdinal("usuarioCreacion"));
+                                    if (!dr.IsDBNull(dr.GetOrdinal("jefeProyecto")))
+                                        proyecto.jefeProyecto= dr.GetString(dr.GetOrdinal("jefeProyecto"));
 
-                                  
                                 }
                             }
                             else
                             {
-                                proyecto.estado = "Proyecto no encontrado";
+                                proyecto.estado = "0: Registros encontrados";
                             }
                         }
                     }
@@ -186,7 +191,7 @@ namespace WebApiMovil.DataLayer
             List<Asignacion> Lista = null;
             try
             {
-                using (SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnxIntranet"].ConnectionString))
+                using (SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnxLaptop"].ConnectionString))
                 {
                     conection.Open();
 

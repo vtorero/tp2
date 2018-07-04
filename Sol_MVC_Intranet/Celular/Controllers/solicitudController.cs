@@ -12,7 +12,10 @@ namespace Celular.Controllers
         public ActionResult Index(string id)
         {
             ViewBag.idProyecto = id;
-            ViewBag.Titulo = "Revisar solicitud";
+            ViewBag.Titulo = "Solicitud de Inspección";
+
+
+
             return View("solicitud");
         }
     }

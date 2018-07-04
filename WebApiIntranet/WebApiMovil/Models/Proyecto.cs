@@ -23,5 +23,7 @@ namespace WebApiMovil.Models
         public DateTime fechaCreacion { get; set; }
         [DataMember]
         public string usuarioCreacion { get; set; }
+        [DataMember]
+        public string jefeProyecto { get; set; }
     }
 }
