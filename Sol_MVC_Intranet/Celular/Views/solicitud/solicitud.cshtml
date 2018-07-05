@@ -70,41 +70,107 @@
         </div>
     </div>
 </div>
-<div class="card card-primary">
-       <div class="row">
-        <div class="card card-info col-sm-6">
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card card-danger">
             <div class="card-header">
-                <h3 class="card-title">Coordinador</h3>
+                <h3 class="card-title">Seleccionar Coordinador</h3>
             </div>
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class=""col">
-                        <button type="button" class="btn btn-primary  btn-sm">Buscar..</button> 
+            <div class="card-body">
+                <label>Nombre Coordinador</label>
+                <input class="form-control" placeholder="" type="text">
+                <div class="form-group">
+                    <label>Fechas</label>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                        </div>
+                        <input class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text">
                     </div>
-                    <div class=""col"><input class="form-control" placeholder="Nombres" disabled="" type="text" id="nombrecoordinador">
-                   </div>
-                    
+                    <!-- /.input group -->
                 </div>
-
-           
-
-
-
-
-
+                <!-- /.form group -->
+                <!-- Date mm/dd/yyyy -->
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                        </div>
+                        <input class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask="" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-block btn-primary  btn-sm" data-toggle="modal" data-target="#exampleModal">Buscar...</button>
+                </div><!-- /.input group -->
             </div>
+            <!-- /.form group -->
+
         </div>
-        <div class="card card-info col-sm-6">
+        <!-- /.card-body -->
+    </div>
+    <div class="col-sm-6">
+        <div class="card card-danger">
             <div class="card-header">
-                <h3 class="card-title">Inspector</h3>
+                <h3 class="card-title">Seleccionar Inspector</h3>
             </div>
-            <div class="col-sm-6">
-                <label>Inspector</label>
+            <div class="card-body">
+                <label>Nombre Coordinador</label>
+                <input class="form-control" placeholder="" type="text">
+                <div class="form-group">
+                    <label>Fechas</label>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                        </div>
+                        <input class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" type="text">
+                    </div>
+                    <!-- /.input group -->
+                </div>
+                <!-- /.form group -->
+                <!-- Date mm/dd/yyyy -->
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                        </div>
+                        <input class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask="" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-block btn-primary  btn-sm">Buscar...</button>
+                </div><!-- /.input group -->
             </div>
+            <!-- /.form group -->
 
         </div>
+        <!-- /.card-body -->
     </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Buscar Recursos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nombres Cordinador</label>
+                    <input class="form-control"  type="text" id="nombreCoordinador">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Seleccionar</button>
+            </div>
+        </div>
     </div>
+</div>
 
     <script src="~/Content/plugins/jquery/jquery.min.js"></script>
     <script>
