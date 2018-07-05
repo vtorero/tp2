@@ -16,6 +16,18 @@ namespace WebApiMovil.BusinessLayer
             asignarDA = new AsignarDA();
         }
 
+        public List<Empleado> ListadoEmpleados(Empleado entidad)
+        {
+            try
+            {
+                return asignarDA.ListadoEmpleados(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public List<Proyecto> ListadoProyectos()
         {
             try

@@ -18,6 +18,18 @@ namespace WebApiMovil.Models
         [DataMember]
         public string Nombres { get; set; }
 
+        [DataMember]
+        public string dni { get; set; }
+
+        [DataMember]
+        public string estado { get; set; }
+
+        [DataMember]
+        public string cargo { get; set; }
+
+        [DataMember]
+        public string tipo { get; set; }
+
 
     }
 }

@@ -131,17 +131,14 @@ namespace WebApiMovil.DataLayer
             List<Empleado> Lista = null;
             try
             {
-                string cnx = "Data Source=WS50A2VJIMENEZ\\SQLEXPRESS;Initial Catalog=inspeccion;Integrated Security=True;";
-                using (SqlConnection conection = new SqlConnection(cnx))
+                using (SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnxLaptop"].ConnectionString))
                 {
                     conection.Open();
-                    using (SqlCommand command = new SqlCommand("SP_OBTENER_EMPLEADO", conection))
+                    using (SqlCommand command = new SqlCommand("SP_BUSCA_RECURSO", conection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@piPageSize", entidad.piPageSize);
-                        command.Parameters.AddWithValue("@piCurrentPage", entidad.iCurrentPage);
-                        command.Parameters.AddWithValue("@pvSortColumn", entidad.pvSortColumn);
-                        command.Parameters.AddWithValue("@pvSortOrder", entidad.pvSortOrder);
+                        command.Parameters.AddWithValue("@nombre", entidad.Apellidos);
+                        command.Parameters.AddWithValue("@cargo", entidad.cargo);
                         using (SqlDataReader dr = command.ExecuteReader())
                         {
                             if (dr.HasRows)
@@ -150,13 +147,12 @@ namespace WebApiMovil.DataLayer
                                 while (dr.Read())
                                 {
                                     Empleado ObjEnt = new Empleado();
-                                    ObjEnt.sEcho = 1;
-                                    ObjEnt.draw = dr.GetInt32(dr.GetOrdinal("iCurrentPage"));
-                                    ObjEnt.iTotalRecords = dr.GetInt32(dr.GetOrdinal("iRecordCount"));
-                                    ObjEnt.iTotalDisplayRecords = dr.GetInt32(dr.GetOrdinal("iRecordCount"))/ dr.GetInt32(dr.GetOrdinal("iPageCount"));
                                     ObjEnt.idEmpleado = dr.GetInt32(dr.GetOrdinal("idEmpleado"));
                                     ObjEnt.Nombres= dr.GetString(dr.GetOrdinal("Nombres"));
                                     ObjEnt.Apellidos = dr.GetString(dr.GetOrdinal("Apellidos"));
+                                    ObjEnt.cargo= dr.GetString(dr.GetOrdinal("cargo"));
+                                    ObjEnt.dni = dr.GetString(dr.GetOrdinal("dni"));
+                                    ObjEnt.tipo = dr.GetString(dr.GetOrdinal("tipo"));
 
 
                                     Lista.Add(ObjEnt);

@@ -16,6 +16,17 @@ namespace WebApiMovil.Services
             asignarBL = new AsignarBL();
         }
 
+        public List<Empleado> BuscarRecurso(Empleado entidad)
+        {
+            try
+            {
+                return asignarBL.ListadoEmpleados(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
         public Proyecto BuscarProyectos(Proyecto entidad)
         {

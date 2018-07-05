@@ -13,14 +13,28 @@ namespace WebApiMovil.Controllers
     public class AsignarController : System.Web.Http.ApiController
     {
         AsignarService asignarService;
-        AsignarDA EmpleadosAD;
+    
         public AsignarController()
         {
             asignarService = new AsignarService();
-            EmpleadosAD = new AsignarDA();
+        
         }
 
         //[Authorize]
+
+        [HttpPost]
+        [ActionName("BuscarRecurso")]
+        public List<Empleado> BuscarRecurso(Empleado entidad)
+        {
+            try
+            {
+                return asignarService.BuscarRecurso(entidad);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
         [HttpPost]
         [ActionName("BuscarProyectoName")]
@@ -52,19 +66,6 @@ namespace WebApiMovil.Controllers
         }
 
         
-        [HttpPost]
-        [ActionName("ListadoEmpleados")]
-        public List<Empleado> ListadoEmpleados(Empleado empleado)
-        {
-            try
-            {
-                return EmpleadosAD.ListadoEmpleados(empleado);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
         [HttpPost]
         [ActionName("ListadoEquiposAsignados")]
